@@ -14,6 +14,13 @@ class App extends Component {
     this.setState({ movies });
   };
 
+  handleLikeMovie = (movie) => {
+    const movies = [...this.state.movies];
+    const index = movies.indexOf(movie);
+    movies[index].liked = !movies[index].liked;
+    this.setState({ movies });
+  };
+
   render() {
     const { movies } = this.state;
 
@@ -27,7 +34,11 @@ class App extends Component {
     return (
       <div className=" p-3 py-md-4">
         <h1>Showing {movies.length} movies in the database</h1>
-        <Movies moviesData={movies} onDeleteMovie={this.handleDeleteMovie} />
+        <Movies
+          moviesData={movies}
+          onDeleteMovie={this.handleDeleteMovie}
+          onLikeMovie={this.handleLikeMovie}
+        />
       </div>
     );
   }

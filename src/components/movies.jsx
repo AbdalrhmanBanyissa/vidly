@@ -1,5 +1,5 @@
-const Movies = (props) => {
-  const { moviesData, onDeleteMovie } = props;
+import Like from "./common/like";
+const Movies = ({ moviesData, onDeleteMovie, onLikeMovie }) => {
   return (
     <table className="table">
       <thead>
@@ -8,6 +8,7 @@ const Movies = (props) => {
           <th>Genre</th>
           <th>Stock</th>
           <th>Rate</th>
+          <th></th>
           <th></th>
         </tr>
       </thead>
@@ -19,6 +20,12 @@ const Movies = (props) => {
               <td>{movie.genre.name}</td>
               <td>{movie.numberInStock}</td>
               <td>{movie.dailyRentalRate}</td>
+              <td>
+                <Like
+                  liked={movie.liked}
+                  onLikeMovie={() => onLikeMovie(movie)}
+                />
+              </td>
               <td>
                 <button
                   onClick={() => onDeleteMovie(movie._id)}
