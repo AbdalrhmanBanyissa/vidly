@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 
 function Like({ liked, onLikeMovie }) {
   return (
@@ -11,6 +12,8 @@ function Like({ liked, onLikeMovie }) {
   );
 }
 
-export default Like;
+Like.propTypes = {
+  onLikeMovie: PropTypes.func.isRequired,
+};
 
-// <i class="fa fa-heart-o" aria-hidden="true"></i>
+export default Like;

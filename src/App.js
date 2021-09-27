@@ -6,8 +6,13 @@ class App extends Component {
     super(props);
     this.state = {
       movies: getMovies(),
+      pageSize: 4,
+      currentPage: 1,
     };
   }
+  handleSelectPage = (page) => {
+    this.setState({ currentPage: page });
+  };
 
   handleDeleteMovie = (_id) => {
     const movies = this.state.movies.filter((movie) => movie._id !== _id);
@@ -22,22 +27,17 @@ class App extends Component {
   };
 
   render() {
-    const { movies } = this.state;
-
-    if (movies.length === 0)
-      return (
-        <div className=" p-3 py-md-4">
-          <h1>There are no movies in the database</h1>
-        </div>
-      );
+    const { movies, pageSize, currentPage } = this.state;
 
     return (
       <div className=" p-3 py-md-4">
-        <h1>Showing {movies.length} movies in the database</h1>
         <Movies
+          pageSize={pageSize}
+          currentPage={currentPage}
           moviesData={movies}
           onDeleteMovie={this.handleDeleteMovie}
           onLikeMovie={this.handleLikeMovie}
+          onSelectPage={this.handleSelectPage}
         />
       </div>
     );
